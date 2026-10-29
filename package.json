@@ -1,0 +1,23 @@
+{
+  "name": "midorino-koumuten-demo",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "placeholders": "node scripts/make-placeholders.mjs",
+    "test:guard": "node scripts/test-guard.mjs",
+    "test:links": "astro build && node scripts/check-links.mjs"
+  },
+  "dependencies": {
+    "astro": "7.4.3"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.4"
+  },
+  "engines": {
+    "node": ">=22.23.4"
+  }
+}

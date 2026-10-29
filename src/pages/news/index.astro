@@ -1,0 +1,17 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import NewsList from '../../components/NewsList.astro';
+import { byDateDesc } from '../../lib/format';
+
+const news = (await getCollection('news')).sort(byDateDesc);
+---
+<Base title="お知らせ">
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">NEWS</p>
+      <h1>お知らせ</h1>
+      <NewsList items={news} />
+    </div>
+  </section>
+</Base>

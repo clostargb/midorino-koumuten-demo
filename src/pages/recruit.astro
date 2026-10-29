@@ -1,0 +1,33 @@
+---
+import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import photo from '../assets/photos/recruit.jpg';
+
+const jobs = (await getCollection('jobs')).sort((a, b) => Number(b.data.open) - Number(a.data.open));
+const rendered = await Promise.all(jobs.map(async (job) => ({ job, Content: (await render(job)).Content })));
+---
+<Base title="採用" description="みどり野工務店の採用情報です。">
+  <section class="section">
+    <div class="container article">
+      <p class="eyebrow">RECRUIT</p>
+      <h1>採用</h1>
+      <Image src={photo} alt="現場で作業する大工" width={1440} />
+      <p class="lead">道具の持ち方から教えます。家づくりを一から覚えたい人を待っています。</p>
+      {rendered.map(({ job, Content }) => (
+        <article style="margin-top:48px">
+          <h2>{job.data.title}<span class="tag" style="margin-left:12px">{job.data.open ? '募集中' : '募集終了'}</span></h2>
+          <table class="table">
+            <tbody>
+              <tr><th>雇用形態</th><td>{job.data.employment}</td></tr>
+              <tr><th>給与</th><td>{job.data.salary}</td></tr>
+              <tr><th>仕事内容</th><td>{job.data.summary}</td></tr>
+            </tbody>
+          </table>
+          <div style="margin-top:16px"><Content /></div>
+        </article>
+      ))}
+      <p style="margin-top:48px">応募・見学のご相談は、<a href="/contact/">お問い合わせ</a>からお電話ください。</p>
+    </div>
+  </section>
+</Base>

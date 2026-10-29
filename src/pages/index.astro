@@ -1,0 +1,51 @@
+---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import WorkCard from '../components/WorkCard.astro';
+import NewsList from '../components/NewsList.astro';
+import { byDateDesc } from '../lib/format';
+import site from '../data/site.json';
+import hero from '../assets/photos/hero.jpg';
+
+const works = (await getCollection('works')).sort(byDateDesc).slice(0, 3);
+const news = (await getCollection('news')).sort(byDateDesc).slice(0, 3);
+---
+<Base>
+  <section class="hero">
+    <Image src={hero} alt="みどり野工務店が建てた木の家" width={1600} loading="eager" />
+    <div class="hero-copy">
+      <p class="eyebrow">みどり野市の工務店 創業{site.founded}</p>
+      <h1><span class="phrase">家を建てるところから、</span><br /><span class="phrase">直すところまで。</span></h1>
+      <p class="lead">新築も、雨漏りひとつの修理も、同じ大工が伺います。</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container strengths">
+      <ol>
+        <li><span class="num">01</span><h3>自社の大工が建てる</h3><p>大工6名が社員です。下請けに出さないので、建てた人が点検にも伺います。</p></li>
+        <li><span class="num">02</span><h3>地元の木を使う</h3><p>床や天井には、みどり野の山で育った杉を使います。</p></li>
+        <li><span class="num">03</span><h3>小さな修理も1件から</h3><p>網戸の張り替えから伺います。見積もりは無料です。</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">WORKS</p>
+      <h2>最近の施工実績</h2>
+      <ul class="cards">{works.map((work) => <WorkCard work={work} />)}</ul>
+      <p style="margin-top:32px"><a href="/works/">施工実績をすべて見る</a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">NEWS</p>
+      <h2>お知らせ</h2>
+      <NewsList items={news} />
+      <p style="margin-top:24px"><a href="/news/">お知らせをすべて見る</a></p>
+    </div>
+  </section>
+</Base>

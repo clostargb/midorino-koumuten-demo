@@ -1,0 +1,16 @@
+---
+import { WORK_CATEGORIES, WORK_CATEGORY_SLUGS, type WorkCategory } from '../lib/categories';
+
+interface Props {
+  current?: WorkCategory;
+}
+const { current } = Astro.props;
+---
+<ul class="filters" aria-label="工事の種類で絞り込む">
+  <li><a href="/works/" aria-current={current ? undefined : 'page'}>すべて</a></li>
+  {WORK_CATEGORIES.map((category) => (
+    <li>
+      <a href={`/works/category/${WORK_CATEGORY_SLUGS[category]}/`} aria-current={current === category ? 'page' : undefined}>{category}</a>
+    </li>
+  ))}
+</ul>

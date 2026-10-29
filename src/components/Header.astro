@@ -1,0 +1,22 @@
+---
+import site from '../data/site.json';
+
+const links = [
+  { href: '/works/', label: '施工実績' },
+  { href: '/news/', label: 'お知らせ' },
+  { href: '/about/', label: '会社案内' },
+  { href: '/recruit/', label: '採用' },
+  { href: '/contact/', label: 'お問い合わせ' },
+];
+const path = Astro.url.pathname;
+---
+<header class="site-header">
+  <div class="container">
+    <a class="logo" href="/">{site.name}</a>
+    <nav class="nav" aria-label="メインメニュー">
+      {links.map((link) => (
+        <a href={link.href} aria-current={path.startsWith(link.href) ? 'page' : undefined}>{link.label}</a>
+      ))}
+    </nav>
+  </div>
+</header>

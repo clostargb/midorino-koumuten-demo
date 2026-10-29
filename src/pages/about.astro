@@ -1,0 +1,29 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import site from '../data/site.json';
+import photo from '../assets/photos/about.jpg';
+---
+<Base title="会社案内">
+  <section class="section">
+    <div class="container article">
+      <p class="eyebrow">ABOUT</p>
+      <h1>会社案内</h1>
+      <Image src={photo} alt="みどり野工務店の作業場" width={1440} />
+      <h2>ごあいさつ</h2>
+      <p>父の代から、みどり野市で家を建て、直してきました。建てた家の具合を、建てた大工が見に行ける。その距離の近さを、これからも大事にしていきます。</p>
+      <p style="text-align:right">{site.representative}</p>
+      <h2>会社概要</h2>
+      <table class="table">
+        <tbody>
+          <tr><th>会社名</th><td>{site.name}(架空)</td></tr>
+          <tr><th>創業</th><td>{site.founded}</td></tr>
+          <tr><th>所在地</th><td>{site.address}</td></tr>
+          <tr><th>従業員</th><td>{site.staff}</td></tr>
+          <tr><th>許可</th><td>{site.license}</td></tr>
+          <tr><th>対応エリア</th><td>{site.area}</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</Base>

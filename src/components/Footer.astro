@@ -1,0 +1,12 @@
+---
+import site from '../data/site.json';
+---
+<footer class="site-footer">
+  <div class="container">
+    <p><strong>{site.name}</strong><br />{site.address}<br />電話 {site.tel}({site.telNote})<br />受付 {site.hours}</p>
+    <p class="crosta-note">
+      {site.crosta.note}
+      <a href={site.crosta.url} target="_blank" rel="noopener">クロスタのサイトへ</a>
+    </p>
+  </div>
+</footer>

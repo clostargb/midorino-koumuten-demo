@@ -1,0 +1,20 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { formatDate, isoDate } from '../lib/format';
+
+interface Props {
+  items: CollectionEntry<'news'>[];
+}
+const { items } = Astro.props;
+---
+<ul class="news">
+  {items.map((item) => (
+    <li>
+      <a href={`/news/${item.id}/`}>
+        <time datetime={isoDate(item.data.date)}>{formatDate(item.data.date)}</time>
+        <span class="tag">{item.data.category}</span>
+        <span>{item.data.title}</span>
+      </a>
+    </li>
+  ))}
+</ul>

@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+import site from '../data/site.json';
+---
+<Base title="お問い合わせ">
+  <section class="section">
+    <div class="container article">
+      <p class="eyebrow">CONTACT</p>
+      <h1>お問い合わせ</h1>
+      <p>修理・リフォーム・新築のご相談、見積もりのご依頼はお電話で承ります。</p>
+      <p class="tel">{site.tel}</p>
+      <p class="meta">{site.telNote}<br />受付 {site.hours}</p>
+      <p>対応エリア: {site.area}</p>
+    </div>
+  </section>
+</Base>

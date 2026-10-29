@@ -1,0 +1,24 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { formatDate, isoDate } from '../../lib/format';
+
+export async function getStaticPaths() {
+  const news = await getCollection('news');
+  return news.map((item) => ({ params: { id: item.id }, props: { item } }));
+}
+
+const { item } = Astro.props;
+const { Content } = await render(item);
+---
+<Base title={item.data.title}>
+  <section class="section">
+    <div class="container article">
+      <p class="eyebrow">{item.data.category}</p>
+      <h1>{item.data.title}</h1>
+      <p class="meta"><time datetime={isoDate(item.data.date)}>{formatDate(item.data.date)}</time></p>
+      <Content />
+      <p style="margin-top:48px"><a href="/news/">お知らせの一覧へ</a></p>
+    </div>
+  </section>
+</Base>

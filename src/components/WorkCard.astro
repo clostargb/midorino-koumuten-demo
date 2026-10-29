@@ -1,0 +1,18 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import { formatDate, isoDate } from '../lib/format';
+
+interface Props {
+  work: CollectionEntry<'works'>;
+}
+const { work } = Astro.props;
+const { title, date, area, category, cover, coverAlt } = work.data;
+---
+<li class="card">
+  <a href={`/works/${work.id}/`}>
+    <Image src={cover} alt={coverAlt} width={720} />
+    <p class="meta"><time datetime={isoDate(date)}>{formatDate(date)}</time><span class="sep">|</span>{area}<span class="sep">|</span>{category}</p>
+    <h3>{title}</h3>
+  </a>
+</li>

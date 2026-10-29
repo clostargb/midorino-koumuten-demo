@@ -1,0 +1,32 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import WorkCard from '../../../components/WorkCard.astro';
+import CategoryFilter from '../../../components/CategoryFilter.astro';
+import { WORK_CATEGORIES, WORK_CATEGORY_SLUGS, type WorkCategory } from '../../../lib/categories';
+import { byDateDesc } from '../../../lib/format';
+
+export function getStaticPaths() {
+  return WORK_CATEGORIES.map((category) => ({
+    params: { slug: WORK_CATEGORY_SLUGS[category] },
+    props: { category },
+  }));
+}
+
+const { category } = Astro.props as { category: WorkCategory };
+const works = (await getCollection('works', (work) => work.data.category === category)).sort(byDateDesc);
+---
+<Base title={`施工実績(${category})`}>
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">WORKS</p>
+      <h1>施工実績</h1>
+      <CategoryFilter current={category} />
+      {works.length ? (
+        <ul class="cards">{works.map((work) => <WorkCard work={work} />)}</ul>
+      ) : (
+        <p>このカテゴリの施工実績は、いま準備中です。</p>
+      )}
+    </div>
+  </section>
+</Base>
