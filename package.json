@@ -12,12 +12,12 @@
     "test:links": "astro build && node scripts/check-links.mjs"
   },
   "dependencies": {
-    "astro": "7.4.3"
+    "astro": "7.4.1"
   },
   "devDependencies": {
     "sharp": "^0.35.4"
   },
   "engines": {
-    "node": ">=22.23.4"
+    "node": ">=22.22.0"
   }
 }
